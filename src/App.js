@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
+import { ThemeProvider, CSSReset, ColorModeProvider, useColorMode } from "@chakra-ui/core";
+import { Button } from "@chakra-ui/core"
 import './App.css';
+import { customTheme } from "./theme/theme"
 
-function App() {
+
+export const App = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={customTheme}>
+      <ColorModeProvider>
+        <CSSReset />
+        <Button onClick={toggleColorMode}>
+          Button {colorMode === "light" ? "Dark" : "Light"}
+        </Button>
+      </ColorModeProvider>
+    </ThemeProvider>
   );
 }
 
